@@ -4,3 +4,5 @@ djangorestframework==3.13.1
 pytz==2022.1
 sqlparse==0.4.2
 Pillow==9.0.1
+numpy~=1.22.3
+Faker~=13.3.4
