@@ -13,9 +13,23 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
+from user.views import UserInitAPIView, UserFormAPIView
+from project.settings import MEDIA_URL, MEDIA_ROOT
+
+# Resource routing
+router = routers.DefaultRouter()
+router.register(r'init', UserInitAPIView, basename='init')
+router.register(r'form', UserFormAPIView, basename='form')
+
 
 urlpatterns = [
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
 ]
+
+# Add media URLs
+urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
